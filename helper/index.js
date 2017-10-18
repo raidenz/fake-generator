@@ -1,44 +1,76 @@
-import faker from 'faker'
+import fetch from 'isomorphic-fetch'
+
+const serverEndpoint = 'http://localhost'
 
 const header = {
-	// 'X-Authentication-Token': token,
-    'Content-Type': 'application/json',
+    // 'Content-Type': 'application/json',
     'Accept': 'application/json',
     'X-BLUEWHALE-DEBUGGER': 1,
-    // 'X-Authentication-Scope': 'Management',
+    // 'x-authentication-scope': 'Management',
 }
 
-const fakeManpower = () => {
-	// prevent duplicate
-	let name = faker.name.firstName();
-	return {
-      idNumber: faker.random.number({min:50000, max:60000}).toString(),
-      fullName: name,
-      birthdate: '1987-12-12',
-      nationality: faker.random.arrayElement(['Singaporean', 'Permanent Resident']),
-      race: faker.random.arrayElement(['Chinese', 'Indian', 'Malay', 'Caucasian']),
-      phoneNumber: faker.phone.phoneNumberFormat(1).toString(),
-      employmentType: faker.random.arrayElement(['Driver', 'Valet', 'Event Personel']),
-      employmentStatus: faker.random.arrayElement(['Full Time', 'Part Time', 'CDLT']),
-      // department: faker.random.arrayElement(["58c8df3ec2dbe3001d9f90e4","58c8df3ec2dbe3001d9f90e5","58ca40767757620026b3c2f8","58e46e0c727e960047c2251d"]),
-      bankName: faker.random.arrayElement(['POSB', 'DBS', 'UOB', 'OCBC', 'HSBC', 'MAYBANK']),
-      bankNameOther: 'nameother',
-      bankAccountName: name,
-      bankAccountNumber: faker.random.number({min:50000, max:59000}).toString(),
-      drivingLicenseClasses: '2',
-      drivingLicenseNumber: faker.random.number({min:50000, max:90000}).toString(),
-      drivingHistory: faker.lorem.sentence(),
-      driverRating: 5,
-      ratingComment: faker.lorem.words(20),
-      profilePicture: faker.random.arrayElement(['http://119.81.52.152:8181/avatar1.jpg', 'http://119.81.52.152:8181/avatar2.jpg']),
-      driverLicensePhotos: {
-        frontSide: 'http://119.81.52.152:8181/kitas1.jpg',
-        backSide: 'http://119.81.52.152:8181/kitas2.jpg',
-      },
-      // language: faker.random.arrayElement(['English']),
-      language: ['English'],
-      email: name + "@cprac.com",
-	}
+const initialSetting = {
+  serverEndpoint: 'http://localhost',
+  header: header,
+  token: '123456'
 }
 
-export {header, fakeManpower}
+const generate = (setting) => {
+  const {api, header, serverEndpoint} = setting
+  fetch(`${serverEndpoint}${api}`, header)
+    .then(res => {
+      console.log(res.status + ' -- ' + res.statusText);
+      if (res.ok) {
+          res.json().then(json => {
+            if (json.status === 'success') {
+              // console.log(JSON.stringify(json))
+              console.log('status: success')
+            } else {}
+          });
+      } else {
+        // throw Error(res.status)
+      }
+    })
+    .catch(function(err) {
+      console.log(new Error(err))
+    });
+}
+
+// POST('/test', 'payload', 'setting')
+const POST = (api, payload = '', setting = initialSetting) => {
+  const {token} = setting
+  const headerToken = {
+    ...header,
+    'X-Authentication-Token': token
+  }
+  const headerFull = {
+    method: 'POST',
+    headers: headerToken,
+    body: (payload !== '') ? (JSON.stringify(payload)) : '',
+  }
+  const generateSetting = {...setting, header: headerFull, api}
+  // console.log(generateSetting)
+}
+
+const GET = (api, setting = initialSetting) => {
+  const {token} = setting
+  const headerToken = {
+    ...header,
+    'X-Authentication-Token': token,
+    'x-authentication-scope': 'Management'
+  }
+  const headerFull = {
+    method: 'GET',
+    headers: headerToken,
+  }
+  const generateSetting = {...setting, header: headerFull, api}
+  // console.log(generateSetting)
+  generate(generateSetting)
+}
+
+export {
+  header,
+  POST,
+  GET,
+  generate
+}
