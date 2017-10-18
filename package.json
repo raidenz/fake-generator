@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel . -d build --ignore node_modules",
+    "start:server": "json-server --watch db.json --port 3030",
     "start": "babel-node generator",
     "start:prod": "node build/generator",
     "test": "jest"

@@ -1,17 +1,16 @@
 import fetch from 'isomorphic-fetch'
 import faker from 'faker'
 
-import { header, GET } from './helper'
+import { fakePost } from './schema'
+import { header, GET, POST } from './helper'
 
 const initialSetting = {
-  serverEndpoint: 'http://13.229.108.111:3030/v1.27.5/v1',
+  serverEndpoint: 'http://localhost:3030',
   header: header,
-  token: '410c1e79-b608-48de-bf1c-3f1ac0ffeabe'
+  token: ''
 }
-
-const adminHeader = {...initialSetting, token: '3917d80c-5344-4fef-85ad-eeccff0b1617', header: { ...initialSetting.header, 'x-authentication-scopeManagement': 'Management'}}
-// console.log(adminHeader)
-GET('/man-power', adminHeader)
+// console.log(fakePost())
+POST('/posts', fakePost(), initialSetting)
 
 const defaultOption = `Choose Option:
 1. fake data 1

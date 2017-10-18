@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Input simulator</title>
-  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/faker.min.js"></script>
   <style type="text/css">
     .main-wrapper{
@@ -45,6 +45,7 @@
       <input type="text" name="hobby" class="input" placeholder="Hobby">
       <button>Submit</button>
     </form>
+    <div id="faker"></div>
   </div>
   <script type="text/javascript">
     $(document).ready(function(e){
@@ -64,7 +65,11 @@
       $("input[name=nationality]").val(nationality);
       $("input[name=hobby]").val(hobby);
       $("textarea[name=address]").val(address);
+
     })
+      $("#faker").on("click", function(e){
+        //
+      });
   </script>
 </body>
 </html>

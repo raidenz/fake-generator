@@ -32,4 +32,11 @@ const fakeManpower = () => {
   }
 }
 
-export {fakeManpower}
+const fakePost = () => {
+  return {
+    title:faker.lorem.words(5),
+    content:faker.lorem.paragraphs(1)
+  }
+}
+
+export {fakeManpower, fakePost}

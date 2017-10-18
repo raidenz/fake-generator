@@ -3,16 +3,14 @@ import fetch from 'isomorphic-fetch'
 const serverEndpoint = 'http://localhost'
 
 const header = {
-    // 'Content-Type': 'application/json',
     'Accept': 'application/json',
     'X-BLUEWHALE-DEBUGGER': 1,
-    // 'x-authentication-scope': 'Management',
 }
 
 const initialSetting = {
   serverEndpoint: 'http://localhost',
   header: header,
-  token: '123456'
+  token: ''
 }
 
 const generate = (setting) => {
@@ -49,7 +47,24 @@ const POST = (api, payload = '', setting = initialSetting) => {
     body: (payload !== '') ? (JSON.stringify(payload)) : '',
   }
   const generateSetting = {...setting, header: headerFull, api}
+  console.log(generateSetting)
+  // generate(generateSetting)
+}
+
+const PUT = (api, payload = '', setting = initialSetting) => {
+  const {token} = setting
+  const headerToken = {
+    ...header,
+    'X-Authentication-Token': token
+  }
+  const headerFull = {
+    method: 'PUT',
+    headers: headerToken,
+    body: (payload !== '') ? (JSON.stringify(payload)) : '',
+  }
+  const generateSetting = {...setting, header: headerFull, api}
   // console.log(generateSetting)
+  generate(generateSetting)
 }
 
 const GET = (api, setting = initialSetting) => {
@@ -71,6 +86,7 @@ const GET = (api, setting = initialSetting) => {
 export {
   header,
   POST,
+  PUT,
   GET,
   generate
 }
