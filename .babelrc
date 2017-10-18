@@ -1,5 +1,5 @@
 {
-  "ignore": ["node_modules", "public/**","views/**"],
+  "ignore": ["node_modules", "public/**","views/**", "build/**"],
   "presets": ["es2015", "stage-2"],
   "comments": false,
   "compact": true

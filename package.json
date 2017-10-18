@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "babel . -d build --ignore node_modules",
+    "start": "babel-node generator",
+    "start:prod": "node build/generator",
+    "test": "jest"
+  },
   "dependencies": {
     "es6-promise": "^4.1.1",
     "faker": "^4.1.0",
