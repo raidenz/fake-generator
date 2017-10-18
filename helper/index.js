@@ -4,6 +4,7 @@ const serverEndpoint = 'http://localhost'
 
 const header = {
     'Accept': 'application/json',
+    'Content-Type': 'application/json',
     'X-BLUEWHALE-DEBUGGER': 1,
 }
 
