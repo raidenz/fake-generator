@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Input simulator</title>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/faker.min.js"></script>
+  <style type="text/css">
+    .main-wrapper{
+      width: 80%;
+      margin: 0 auto;
+    }
+    .center{
+      text-align: center;
+    }
+    .testform{
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .testform .input{
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    .testform button{
+      padding: 10px;
+      background-color: #bcbcbc;
+      border: 1px solid #bcbcbc;
+      min-width: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <form class="testform" method="POST">
+      <p class="center">Test Form</p>
+      <input type="text" name="title" class="input" placeholder="Name">
+      <input type="text" name="phone" class="input" placeholder="Phonenumber">
+      <input type="text" name="email" class="input" placeholder="Email Address">
+      <input type="text" name="nationality" class="input" placeholder="Nationality">
+      <input type="text" name="dob" class="input" placeholder="Date of Birth">
+      <textarea name="address" class="input" placeholder="Address"></textarea>
+      <input type="text" name="hobby" class="input" placeholder="Hobby">
+      <button>Submit</button>
+    </form>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function(e){
+      var title = faker.name.firstName();
+      var last = faker.name.lastName();
+      var email = faker.internet.email(title);
+      var phone = faker.phone.phoneNumber();
+      var nationality = faker.address.country();
+      var dob = faker.date.past(27);
+      var hobby = faker.helpers.randomize(['fishing', 'reading', 'swimming']);
+      var address = faker.lorem.paragraphs(1);
+
+      $("input[name=title]").val(title +' '+last);
+      $("input[name=phone]").val(phone);
+      $("input[name=email]").val(email);
+      $("input[name=dob]").val(dob);
+      $("input[name=nationality]").val(nationality);
+      $("input[name=hobby]").val(hobby);
+      $("textarea[name=address]").val(address);
+    })
+  </script>
+</body>
+</html>
