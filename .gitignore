@@ -2,3 +2,4 @@ node_modules
 build
 temp
 db.json
+.env

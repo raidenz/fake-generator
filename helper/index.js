@@ -3,8 +3,8 @@ import fetch from 'isomorphic-fetch'
 const serverEndpoint = 'http://localhost'
 
 const header = {
-    'Content-Type': 'application/json',
-    'X-BLUEWHALE-DEBUGGER': 1,
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
 }
 
 const initialSetting = {
@@ -49,16 +49,10 @@ const generate = (setting) => {
 
 // POST('/test', 'payload', 'setting')
 const POST = (api, payload = '', setting = initialSetting) => {
-  const {token} = setting
-  const headerToken = {
-    ...header,
-    'X-Authentication-Token': token,
-    'Accept': 'application/json',
-    'x-authentication-scope': 'Management', //
-  }
+  const {token, header} = setting
   const headerFull = {
     method: 'POST',
-    headers: headerToken,
+    headers: header,
     body: (payload !== '') ? (JSON.stringify(payload)) : '',
   }
   const generateSetting = {...setting, header: headerFull, api}
@@ -67,14 +61,10 @@ const POST = (api, payload = '', setting = initialSetting) => {
 }
 
 const PUT = (api, payload = '', setting = initialSetting) => {
-  const {token} = setting
-  const headerToken = {
-    ...header,
-    'X-Authentication-Token': token
-  }
+  const {token, header} = setting
   const headerFull = {
     method: 'PUT',
-    headers: headerToken,
+    headers: header,
     body: (payload !== '') ? (JSON.stringify(payload)) : '',
   }
   const generateSetting = {...setting, header: headerFull, api}
@@ -83,15 +73,10 @@ const PUT = (api, payload = '', setting = initialSetting) => {
 }
 
 const GET = (api, setting = initialSetting) => {
-  const {token} = setting
-  const headerToken = {
-    ...header,
-    'X-Authentication-Token': token,
-    'x-authentication-scope': 'Management'
-  }
+  const {token, header} = setting
   const headerFull = {
     method: 'GET',
-    headers: headerToken,
+    headers: header,
   }
   const generateSetting = {...setting, header: headerFull, api}
   // console.log(generateSetting)

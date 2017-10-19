@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "dotenv": "^4.0.0",
     "es6-promise": "^4.1.1",
     "faker": "^4.1.0",
     "isomorphic-fetch": "^2.2.1",
