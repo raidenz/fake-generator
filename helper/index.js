@@ -48,8 +48,8 @@ const POST = (api, payload = '', setting = initialSetting) => {
     body: (payload !== '') ? (JSON.stringify(payload)) : '',
   }
   const generateSetting = {...setting, header: headerFull, api}
-  console.log(generateSetting)
-  // generate(generateSetting)
+  // console.log(generateSetting)
+  generate(generateSetting)
 }
 
 const PUT = (api, payload = '', setting = initialSetting) => {
