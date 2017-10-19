@@ -7,8 +7,8 @@
     "build": "babel . -d build --ignore node_modules",
     "start:server": "json-server --watch db.json --port 3030",
     "start": "babel-node generator",
-    "fake:manpower": "babel-node generator2.js 1",
     "start:prod": "node build/generator",
+    "fake:manpower": "babel-node generator.js 1",
     "test": "jest"
   },
   "dependencies": {
