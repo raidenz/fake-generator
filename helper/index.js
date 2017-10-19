@@ -10,7 +10,6 @@ const header = {
 const initialSetting = {
   serverEndpoint: 'http://localhost',
   header: header,
-  token: ''
 }
 
 const generate = (setting) => {
@@ -18,18 +17,6 @@ const generate = (setting) => {
   fetch(`${serverEndpoint}${api}`, header)
     .then(res => {
       console.log(res.status + ' -- ' + res.statusText);
-      // console.log(res)
-      // ====================
-
-          // res.json().then(json => {
-          //   if (json.status === 'success') {
-          //     // console.log('status: success')
-          //   } else {
-          //     console.log(JSON.stringify(json))
-          //   }
-          // });
-
-      // ====================
       if (res.ok) {
           res.json().then(json => {
             if (json.status === 'success') {
