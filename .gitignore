@@ -3,3 +3,4 @@ build
 temp
 db.json
 .env
+gitver.js

@@ -8,9 +8,18 @@
     "start:server": "json-server --watch db.json --port 3030",
     "start": "babel-node generator",
     "start:prod": "node build/generator",
+    "generate:changelog": "node -e \"require('changelog-generator')('https://github.com/raidenz/fake-generator/commits/master')\"",
     "fake:manpower": "babel-node generator.js 1",
     "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raidenz/fake-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/raidenz/fake-generator/issues"
+  },
+  "homepage": "https://github.com/raidenz/fake-generator#readme",
   "dependencies": {
     "dotenv": "^4.0.0",
     "es6-promise": "^4.1.1",
@@ -22,6 +31,7 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1"
+    "babel-preset-stage-2": "^6.24.1",
+    "changelog-generator": "^0.0.4"
   }
 }
