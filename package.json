@@ -8,7 +8,7 @@
     "start:server": "json-server --watch db.json --port 3030",
     "start": "babel-node generator",
     "start:prod": "node build/generator",
-    "generate:changelog": "node -e \"require('changelog-generator')('https://github.com/raidenz/fake-generator/commits/master')\"",
+    "generate:changelog": "node -e \"require('changelog-generator')('https://github.com/raidenz/fake-generator')\"",
     "fake:manpower": "babel-node generator.js 1",
     "test": "jest"
   },
