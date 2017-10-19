@@ -3,7 +3,6 @@ import fetch from 'isomorphic-fetch'
 const serverEndpoint = 'http://localhost'
 
 const header = {
-    'Accept': 'application/json',
     'Content-Type': 'application/json',
     'X-BLUEWHALE-DEBUGGER': 1,
 }
@@ -19,12 +18,25 @@ const generate = (setting) => {
   fetch(`${serverEndpoint}${api}`, header)
     .then(res => {
       console.log(res.status + ' -- ' + res.statusText);
+      // console.log(res)
+      // ====================
+
+          // res.json().then(json => {
+          //   if (json.status === 'success') {
+          //     // console.log('status: success')
+          //   } else {
+          //     console.log(JSON.stringify(json))
+          //   }
+          // });
+
+      // ====================
       if (res.ok) {
           res.json().then(json => {
             if (json.status === 'success') {
-              // console.log(JSON.stringify(json))
-              console.log('status: success')
-            } else {}
+              // console.log('status: success')
+            } else {
+              console.log(JSON.stringify(json))
+            }
           });
       } else {
         // throw Error(res.status)
@@ -40,7 +52,9 @@ const POST = (api, payload = '', setting = initialSetting) => {
   const {token} = setting
   const headerToken = {
     ...header,
-    'X-Authentication-Token': token
+    'X-Authentication-Token': token,
+    'Accept': 'application/json',
+    'x-authentication-scope': 'Management', //
   }
   const headerFull = {
     method: 'POST',
