@@ -15,19 +15,13 @@ const initialSetting = {
 const generate = (setting) => {
   const {api, header, serverEndpoint} = setting
   fetch(`${serverEndpoint}${api}`, header)
-    .then(res => {
-      console.log(res.status + ' -- ' + res.statusText);
-      if (res.ok) {
-          res.json().then(json => {
-            if (json.status === 'success') {
-              // console.log('status: success')
-            } else {
-              console.log(JSON.stringify(json))
-            }
-          });
-      } else {
-        // throw Error(res.status)
-      }
+    // improvement
+    .then( resp => {
+      console.log(`${resp.status} -- ${resp.statusText}`)
+      return (resp.json())
+    }) // Transform the data into json
+    .then((data) => {
+      console.log(data)
     })
     .catch(function(err) {
       console.log(new Error(err))
